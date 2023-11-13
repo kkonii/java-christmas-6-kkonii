@@ -11,7 +11,7 @@ public class Converter {
                 .map(menu -> menu.split("-"))
                 .collect(Collectors.toMap(
                         pair -> pair[0],
-                        pair -> Integer.parseInt(pair[1])
+                        pair -> parseToInt(pair[1])
                 ));
 
         return resultMap;
@@ -19,5 +19,13 @@ public class Converter {
 
     private static String removeWhiteSpace(String userInput) {
         return userInput.replaceAll("\\s+", "");
+    }
+
+    private static Integer parseToInt(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
     }
 }
