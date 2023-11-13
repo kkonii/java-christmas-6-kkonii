@@ -11,7 +11,8 @@ public class Converter {
                 .map(menu -> menu.split("-"))
                 .collect(Collectors.toMap(
                         pair -> pair[0],
-                        pair -> parseToInt(pair[1])
+                        pair -> parseToInt(pair[1]),
+                        (existedInput, reInput) -> Validator.validateDuplication(existedInput)
                 ));
 
         return resultMap;
