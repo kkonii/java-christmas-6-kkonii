@@ -17,7 +17,7 @@ public class OrderTest {
         userOrder.put("티본스테이크", 3);
         userOrder.put("크리스마스파스타", 1);
 
-        assertThatThrownBy(() -> Order.from(userOrder))
+        assertThatThrownBy(() -> Order.of(Date.from(2), userOrder))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
     }
