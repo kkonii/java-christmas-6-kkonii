@@ -32,6 +32,10 @@ public enum Menu {
         return name;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
     public static Menu findMatchMenu(String inputName) {
         return Arrays.stream(Menu.values())
                 .filter(menu -> menu.name.equals(inputName))

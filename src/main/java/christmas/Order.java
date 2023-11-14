@@ -19,4 +19,12 @@ public class Order {
 
         return new Order(order);
     }
+
+    public Integer calculateTotalPrice() {
+        return this.order.entrySet().stream()
+                .mapToInt(entry ->
+                        entry.getKey().getPrice() * entry.getValue()
+                )
+                .sum();
+    }
 }
