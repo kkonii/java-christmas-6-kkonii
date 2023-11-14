@@ -14,7 +14,6 @@ public class Converter {
                         pair -> parseToInt(pair[1]),
                         (existedInput, reInput) -> Validator.validateDuplication(existedInput)
                 ));
-
         return resultMap;
     }
 
@@ -28,5 +27,12 @@ public class Converter {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public static String convertToOrder(Map<String, Integer> menuPair) {
+        return menuPair.entrySet()
+                .stream()
+                .map(entry -> String.format("%s %d개", entry.getKey(), entry.getValue()))
+                .collect(Collectors.joining("\n"));
     }
 }
