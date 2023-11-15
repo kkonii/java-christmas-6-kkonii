@@ -7,7 +7,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public enum DiscountEvents {
+public enum Events {
     D_DAY_DISCOUNT("크리스마스 디데이 할인", (date, menu) -> 1000 + 100 * (date - 1),
             EventCondition.D_DAY::findMatchDay,
             DiscountCalculator::calculateSingleDiscount),
@@ -35,19 +35,19 @@ public enum DiscountEvents {
     private final String title;
     private final BiFunction<Integer, Menu, Integer> discountAmount;
     private final BiPredicate<Integer, Integer> condition;
-    private final BiFunction<Order, DiscountEvents, Integer> discountCalculator;
+    private final BiFunction<Order, Events, Integer> discountCalculator;
 
-    DiscountEvents(String title, BiFunction<Integer, Menu, Integer> discountAmount,
-                   BiPredicate<Integer, Integer> condition,
-                   BiFunction<Order, DiscountEvents, Integer> discountCalculator) {
+    Events(String title, BiFunction<Integer, Menu, Integer> discountAmount,
+           BiPredicate<Integer, Integer> condition,
+           BiFunction<Order, Events, Integer> discountCalculator) {
         this.title = title;
         this.discountAmount = discountAmount;
         this.condition = condition;
         this.discountCalculator = discountCalculator;
     }
 
-    public static Map<DiscountEvents, Long> findMatchEvents(int date, int totalPrice) {
-        return Arrays.stream(DiscountEvents.values())
+    public static Map<Events, Long> findMatchEvents(int date, int totalPrice) {
+        return Arrays.stream(Events.values())
                 .filter(event -> event.condition.test(date, totalPrice))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }

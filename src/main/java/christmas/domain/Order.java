@@ -65,7 +65,7 @@ public class Order {
                 .sum();
     }
 
-    private Map<DiscountEvents, Integer> processAppliedEvents() {
+    private Map<Events, Integer> processAppliedEvents() {
         return countAppliedEvents().entrySet().stream()
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
@@ -73,8 +73,8 @@ public class Order {
                 ));
     }
 
-    private Map<DiscountEvents, Long> countAppliedEvents() {
-        return DiscountEvents.findMatchEvents(
+    private Map<Events, Long> countAppliedEvents() {
+        return Events.findMatchEvents(
                 date.getDate(), calculateTotalPrice()
         );
     }

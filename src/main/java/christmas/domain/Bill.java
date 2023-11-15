@@ -4,17 +4,17 @@ import christmas.global.Const;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public record Bill(int totalPrice, Map<DiscountEvents, Integer> orders) {
+public record Bill(int totalPrice, Map<Events, Integer> orders) {
     public String processPromotion() {
         if (EventCondition.GIFT_DAY.findMatchDay(Const.EMPTY_VALUE, totalPrice)) {
             return Menu.PROMOTION.getName();
         }
-        return DiscountEvents.NONE_DISCOUNT.getTitle();
+        return Events.NONE_DISCOUNT.getTitle();
     }
 
     public String processTotalBenefits() {
         if (hasNoneEvent()) {
-            return DiscountEvents.NONE_DISCOUNT.getTitle();
+            return Events.NONE_DISCOUNT.getTitle();
         }
 
         return orders.entrySet().stream()
@@ -28,7 +28,7 @@ public record Bill(int totalPrice, Map<DiscountEvents, Integer> orders) {
     }
 
     private boolean hasNoneEvent() {
-        return orders.containsKey(DiscountEvents.NONE_DISCOUNT);
+        return orders.containsKey(Events.NONE_DISCOUNT);
     }
 
     public int processBenefitPrice() {
