@@ -31,7 +31,7 @@ public class Converter {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw InvalidDateException.of(ErrorMessage.NON_NUMERIC_VALUE);
+            throw InvalidDateException.of(ErrorMessage.NOT_REQUIRED_RANGE);
         }
     }
 
