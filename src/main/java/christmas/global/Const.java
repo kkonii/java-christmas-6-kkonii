@@ -1,4 +1,4 @@
-package christmas;
+package christmas.global;
 
 public class Const {
     public static final int MIN_RANGE = 1;

@@ -1,5 +1,6 @@
-package christmas;
+package christmas.domain;
 
+import christmas.global.Const;
 import java.util.Map;
 import java.util.stream.Collectors;
 
