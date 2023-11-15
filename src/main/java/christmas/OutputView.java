@@ -48,4 +48,18 @@ public class OutputView {
     private static void printExpectedPriceBanner() {
         System.out.println("<할인 후 예상 결제 금액>");
     }
+
+    public static void printEventBadge(String badgeName) {
+        printWhiteSpace();
+        printBadgeBanner();
+        System.out.println(badgeName);
+    }
+
+    private static void printBadgeBanner() {
+        System.out.println("<12월 이벤트 배지>");
+    }
+
+    public static void printError(String errorMessage) {
+        System.out.println(errorMessage);
+    }
 }
