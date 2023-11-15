@@ -1,5 +1,7 @@
 package christmas;
 
+import christmas.exception.ErrorMessage;
+import christmas.exception.InvalidOrderException;
 import java.util.Arrays;
 
 public enum Menu {
@@ -18,7 +20,6 @@ public enum Menu {
     ZERO_COKE("제로콜라", 3_000, Type.Drinks),
     RED_WINE("레드와인", 60_000, Type.Drinks),
     CHAMPAGNE("샴페인", 25_000, Type.Drinks);
-
 
     private final String name;
     private final int price;
@@ -46,7 +47,7 @@ public enum Menu {
         return Arrays.stream(Menu.values())
                 .filter(menu -> menu.name.equals(inputName))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."));
+                .orElseThrow(() -> InvalidOrderException.of(ErrorMessage.NOT_EXIST_VALUE));
     }
 }
 

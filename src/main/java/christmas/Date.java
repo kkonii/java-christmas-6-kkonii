@@ -1,5 +1,8 @@
 package christmas;
 
+import christmas.exception.ErrorMessage;
+import christmas.exception.InvalidDateException;
+
 public class Date {
     private final Integer date;
 
@@ -14,7 +17,7 @@ public class Date {
 
     private void validateRange(int date) {
         if (isNotRequiredRange(date)) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+            throw InvalidDateException.of(ErrorMessage.NOT_REQUIRED_RANGE);
         }
     }
 

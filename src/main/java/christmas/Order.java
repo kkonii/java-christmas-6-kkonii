@@ -1,5 +1,7 @@
 package christmas;
 
+import christmas.exception.ErrorMessage;
+import christmas.exception.InvalidOrderException;
 import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -28,7 +30,7 @@ public class Order {
         int totalQuantities = calculateTotalQuantity(order);
 
         if (isOverLimit(totalQuantities)) {
-            throw new IllegalArgumentException("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.");
+            throw InvalidOrderException.of(ErrorMessage.OVER_LIMIT);
         }
     }
 

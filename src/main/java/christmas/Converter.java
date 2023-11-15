@@ -1,5 +1,7 @@
 package christmas;
 
+import christmas.exception.ErrorMessage;
+import christmas.exception.InvalidDateException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -21,11 +23,11 @@ public class Converter {
         return userInput.replaceAll("\\s+", "");
     }
 
-    private static Integer parseToInt(String input) {
+    public static Integer parseToInt(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+            throw InvalidDateException.of(ErrorMessage.NON_NUMERIC_VALUE);
         }
     }
 
