@@ -38,4 +38,10 @@ public record Bill(int totalPrice, Map<DiscountEvents, Integer> orders) {
 
         return priceAfterDiscount;
     }
+
+    public String processBadge() {
+        return Badge.findMatchBadge(
+                processBenefitPrice()
+        );
+    }
 }
