@@ -10,7 +10,7 @@ public record Bill(int totalPrice, Map<DiscountEvents, Integer> orders) {
         }
 
         return orders.entrySet().stream()
-                .filter(order -> order.getValue() != 0)
+                .filter(order -> order.getValue() != Const.EMPTY_VALUE)
                 .map(event -> String.format(
                         "%s: -%,d원%n",
                         event.getKey().getTitle(),
@@ -32,7 +32,7 @@ public record Bill(int totalPrice, Map<DiscountEvents, Integer> orders) {
     public int processExpectedPrice() {
         int priceAfterDiscount = totalPrice - processBenefitPrice();
 
-        if (EventCondition.GIFT_DAY.findMatchDay(0, totalPrice)) {
+        if (EventCondition.GIFT_DAY.findMatchDay(Const.EMPTY_VALUE, totalPrice)) {
             priceAfterDiscount += Menu.CHAMPAGNE.getPrice();
         }
 

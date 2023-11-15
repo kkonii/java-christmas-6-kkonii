@@ -22,7 +22,7 @@ public class Date {
     }
 
     private boolean isNotRequiredRange(int date) {
-        return date < 1 || date > 31;
+        return date < Const.MIN_RANGE || date > Const.MAX_RANGE;
     }
 
     public Integer getDate() {

@@ -39,7 +39,7 @@ public class Order {
     }
 
     private boolean isOverLimit(int quantities) {
-        return quantities > 20;
+        return quantities > Const.LIMIT_QUANTITY;
     }
 
     public Integer getDate() {

@@ -6,7 +6,7 @@ public class DiscountCalculator {
         return order.getOrder().entrySet().stream()
                 .findFirst()
                 .map(entry -> event.getDiscountAmount(order.getDate(), entry.getKey()))
-                .orElse(0);
+                .orElse(Const.EMPTY_VALUE);
     }
 
     // for weekday event, weekend event

@@ -7,20 +7,23 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Converter {
+    private static final String SEPARATOR = ",";
+    private static final String PAIR_SEPARATOR = ",";
+
     public static Map<String, Integer> convertToPair(String userMenus) {
-        Map<String, Integer> resultMap = Arrays.stream(userMenus.split(","))
+        Map<String, Integer> resultMap = Arrays.stream(userMenus.split(SEPARATOR))
                 .map(Converter::removeWhiteSpace)
-                .map(menu -> menu.split("-"))
+                .map(menu -> menu.split(PAIR_SEPARATOR))
                 .collect(Collectors.toMap(
-                        pair -> pair[0],
-                        pair -> parseToInt(pair[1]),
+                        pair -> pair[Const.START_VALUE],
+                        pair -> parseToInt(pair[Const.INCREMENT]),
                         (existedInput, reInput) -> Validator.validateDuplication(existedInput)
                 ));
         return resultMap;
     }
 
     private static String removeWhiteSpace(String userInput) {
-        return userInput.replaceAll("\\s+", "");
+        return userInput.replaceAll(Const.SPACE_BAR, Const.REMOVE);
     }
 
     public static Integer parseToInt(String input) {
@@ -35,6 +38,6 @@ public class Converter {
         return menuPair.entrySet()
                 .stream()
                 .map(entry -> String.format("%s %d개", entry.getKey(), entry.getValue()))
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining(Const.ENTER));
     }
 }
