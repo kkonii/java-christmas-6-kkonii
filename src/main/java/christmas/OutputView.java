@@ -37,6 +37,28 @@ public class OutputView {
         System.out.println("<혜택 내역>");
     }
 
+    public static void printPromotion(String promotion) {
+        printWhiteSpace();
+        printPromotionBanner();
+        System.out.println(promotion);
+    }
+
+    private static void printPromotionBanner() {
+        System.out.println("<증정 메뉴>");
+    }
+
+    public static void printTotalBenefitPrice(int price) {
+        printWhiteSpace();
+        printBenefitPriceBanner();
+        System.out.println(
+                String.format("-%,d원", price)
+        );
+    }
+
+    private static void printBenefitPriceBanner() {
+        System.out.println("<총혜택 금액>");
+    }
+
     public static void printExpectedPrice(int price) {
         printWhiteSpace();
         printExpectedPriceBanner();
