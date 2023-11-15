@@ -56,12 +56,12 @@ public class Order {
                 .sum();
     }
 
-    public Map<DiscountEvents, Integer> calculateTotalDiscount() {
-        return countAppliedEvents().entrySet().stream()
+    public Bill createDiscountBill() {
+        return new Bill(countAppliedEvents().entrySet().stream()
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
                         entry -> entry.getKey().countDiscountEvent(this)
-                ));
+                )));
     }
 
     private Map<DiscountEvents, Long> countAppliedEvents() {

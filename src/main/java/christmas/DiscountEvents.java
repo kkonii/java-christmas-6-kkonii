@@ -52,6 +52,10 @@ public enum DiscountEvents {
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public Integer getDiscountAmount(Integer date, Menu menu) {
         return discountAmount.apply(date, menu);
     }
