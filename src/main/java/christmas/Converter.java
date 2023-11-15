@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class Converter {
     private static final String SEPARATOR = ",";
-    private static final String PAIR_SEPARATOR = ",";
+    private static final String PAIR_SEPARATOR = "-";
 
     public static Map<String, Integer> convertToPair(String userMenus) {
         Map<String, Integer> resultMap = Arrays.stream(userMenus.split(SEPARATOR))
