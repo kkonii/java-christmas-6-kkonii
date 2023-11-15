@@ -19,7 +19,8 @@ public enum Menu {
 
     ZERO_COKE("제로콜라", 3_000, Type.Drinks),
     RED_WINE("레드와인", 60_000, Type.Drinks),
-    CHAMPAGNE("샴페인", 25_000, Type.Drinks);
+    CHAMPAGNE("샴페인", 25_000, Type.Drinks),
+    PROMOTION("샴페인 1개", 25_000, Type.Promotion);
 
     private final String name;
     private final int price;

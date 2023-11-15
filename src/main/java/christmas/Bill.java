@@ -4,6 +4,13 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public record Bill(int totalPrice, Map<DiscountEvents, Integer> orders) {
+    public String processPromotion() {
+        if (EventCondition.GIFT_DAY.findMatchDay(Const.EMPTY_VALUE, totalPrice)) {
+            return Menu.PROMOTION.getName();
+        }
+        return DiscountEvents.NONE_DISCOUNT.getTitle();
+    }
+
     public String processTotalBenefits() {
         if (hasNoneEvent()) {
             return DiscountEvents.NONE_DISCOUNT.getTitle();
@@ -33,7 +40,7 @@ public record Bill(int totalPrice, Map<DiscountEvents, Integer> orders) {
         int priceAfterDiscount = totalPrice - processBenefitPrice();
 
         if (EventCondition.GIFT_DAY.findMatchDay(Const.EMPTY_VALUE, totalPrice)) {
-            priceAfterDiscount += Menu.CHAMPAGNE.getPrice();
+            priceAfterDiscount += Menu.PROMOTION.getPrice();
         }
 
         return priceAfterDiscount;
