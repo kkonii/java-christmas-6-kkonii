@@ -15,7 +15,7 @@ public class OutputView {
         System.out.println("<주문 메뉴>");
     }
 
-    public static void printTotalPrice(Integer price) { //헤더를 추후 플래카드/혹은 배너로 이름 변경
+    public static void printTotalPrice(Integer price) {
         printWhiteSpace();
         printTotalPriceBanner();
         System.out.println(
@@ -35,5 +35,17 @@ public class OutputView {
 
     private static void printBenefitBanner() {
         System.out.println("<혜택 내역>");
+    }
+
+    public static void printExpectedPrice(int price) {
+        printWhiteSpace();
+        printExpectedPriceBanner();
+        System.out.println(
+                String.format("%,d원", price)
+        );
+    }
+
+    private static void printExpectedPriceBanner() {
+        System.out.println("<할인 후 예상 결제 금액>");
     }
 }
