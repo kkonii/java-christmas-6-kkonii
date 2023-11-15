@@ -21,4 +21,8 @@ public class Date {
     private boolean isNotRequiredRange(int date) {
         return date < 1 || date > 31;
     }
+
+    public Integer getDate() {
+        return date;
+    }
 }

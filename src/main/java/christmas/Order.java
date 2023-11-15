@@ -39,11 +39,21 @@ public class Order {
         return quantities > 20;
     }
 
+    public Integer getDate() {
+        return date.getDate();
+    }
+
     public Integer calculateTotalPrice() {
         return this.order.entrySet().stream()
                 .mapToInt(entry ->
                         entry.getKey().getPrice() * entry.getValue()
                 )
                 .sum();
+    }
+
+    private Map<DiscountEvents, Long> countAppliedEvents() {
+        return DiscountEvents.findMatchEvents(
+                date.getDate(), calculateTotalPrice()
+        );
     }
 }

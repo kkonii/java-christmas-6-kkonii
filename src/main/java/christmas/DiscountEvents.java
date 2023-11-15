@@ -40,7 +40,7 @@ public enum DiscountEvents {
 
     public static Map<DiscountEvents, Long> findMatchEvents(int date, int totalPrice) {
         return Arrays.stream(DiscountEvents.values())
-                .filter(event -> (boolean) event.condition.test(date, totalPrice))
+                .filter(event -> event.condition.test(date, totalPrice))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 }
