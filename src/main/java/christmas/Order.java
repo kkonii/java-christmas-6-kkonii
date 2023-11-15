@@ -1,5 +1,6 @@
 package christmas;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -43,12 +44,24 @@ public class Order {
         return date.getDate();
     }
 
+    public Map<Menu, Integer> getOrder() {
+        return Collections.unmodifiableMap(this.order);
+    }
+
     public Integer calculateTotalPrice() {
         return this.order.entrySet().stream()
                 .mapToInt(entry ->
                         entry.getKey().getPrice() * entry.getValue()
                 )
                 .sum();
+    }
+
+    public Map<DiscountEvents, Integer> calculateTotalDiscount() {
+        return countAppliedEvents().entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> entry.getKey().countDiscountEvent(this)
+                ));
     }
 
     private Map<DiscountEvents, Long> countAppliedEvents() {
