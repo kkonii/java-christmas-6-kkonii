@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.domain.Bill;
 import christmas.domain.Date;
 import christmas.domain.Order;
 import christmas.util.Converter;
@@ -12,6 +13,13 @@ public class Planner {
     public void run() {
         Date date = requestUserDate();
         Order order = Order.of(date, requestUserMenu());
+        Bill bill = order.createBill();
+
+        OutputView.printPreviewBanner(
+                date.getDate()
+        );
+
+        printBill(order, bill);
     }
 
     private Date requestUserDate() {
@@ -37,4 +45,21 @@ public class Planner {
             }
         }
     }
+
+    private void printBill(Order order, Bill bill) {
+        OutputView.printOrders(order.processTotalOrders());
+
+        OutputView.printTotalPrice(order.calculateTotalPrice());
+
+        OutputView.printPromotion(bill.processPromotion());
+
+        OutputView.printBenefits(bill.processTotalBenefits());
+
+        OutputView.printTotalBenefitPrice(bill.processBenefitPrice());
+
+        OutputView.printExpectedPrice(bill.processExpectedPrice());
+
+        OutputView.printEventBadge(bill.processBadge());
+    }
+
 }

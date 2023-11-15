@@ -1,6 +1,11 @@
 package christmas.view;
 
 public class OutputView {
+
+    public static void printGeneric(String message) {
+        System.out.println(message);
+    }
+
     public static void printOrders(String order) {
         printWhiteSpace();
         printOrderBanner();
@@ -21,6 +26,10 @@ public class OutputView {
         System.out.println(
                 String.format("%,d원", price)
         );
+    }
+
+    public static void printPreviewBanner(int date) {
+        System.out.println("12월 " + date + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
     }
 
     private static void printTotalPriceBanner() {
