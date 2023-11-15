@@ -3,7 +3,7 @@ package christmas;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public record Bill(Map<DiscountEvents, Integer> orders) {
+public record Bill(int totalPrice, Map<DiscountEvents, Integer> orders) {
     public String processTotalBenefits() {
         if (hasNoneEvent()) {
             return DiscountEvents.NONE_DISCOUNT.getTitle();
@@ -21,5 +21,21 @@ public record Bill(Map<DiscountEvents, Integer> orders) {
 
     private boolean hasNoneEvent() {
         return orders.containsKey(DiscountEvents.NONE_DISCOUNT);
+    }
+
+    public int processBenefitPrice() {
+        return orders.entrySet().stream()
+                .mapToInt(Map.Entry::getValue)
+                .sum();
+    }
+
+    public int processExpectedPrice() {
+        int priceAfterDiscount = totalPrice - processBenefitPrice();
+
+        if (EventCondition.GIFT_DAY.findMatchDay(0, totalPrice)) {
+            priceAfterDiscount += Menu.CHAMPAGNE.getPrice();
+        }
+
+        return priceAfterDiscount;
     }
 }

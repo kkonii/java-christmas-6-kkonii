@@ -48,7 +48,13 @@ public class Order {
         return Collections.unmodifiableMap(this.order);
     }
 
-    public Integer calculateTotalPrice() {
+    public Bill createBill() {
+        return new Bill(
+                calculateTotalPrice(), processAppliedEvents()
+        );
+    }
+
+    public int calculateTotalPrice() {
         return this.order.entrySet().stream()
                 .mapToInt(entry ->
                         entry.getKey().getPrice() * entry.getValue()
@@ -56,12 +62,12 @@ public class Order {
                 .sum();
     }
 
-    public Bill createDiscountBill() {
-        return new Bill(countAppliedEvents().entrySet().stream()
+    private Map<DiscountEvents, Integer> processAppliedEvents() {
+        return countAppliedEvents().entrySet().stream()
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
                         entry -> entry.getKey().countDiscountEvent(this)
-                )));
+                ));
     }
 
     private Map<DiscountEvents, Long> countAppliedEvents() {
