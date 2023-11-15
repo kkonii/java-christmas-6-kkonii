@@ -3,6 +3,7 @@ package christmas.domain;
 import christmas.exception.ErrorMessage;
 import christmas.exception.InvalidOrderException;
 import christmas.global.Const;
+import christmas.global.Format;
 import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -49,6 +50,12 @@ public class Order {
 
     public Map<Menu, Integer> getOrder() {
         return Collections.unmodifiableMap(this.order);
+    }
+
+    public String processTotalOrders() {
+        return order.entrySet().stream()
+                .map(entry -> String.format(Format.ORDER_COUNT, entry.getKey().getName(), entry.getValue()))
+                .collect(Collectors.joining(Const.ENTER));
     }
 
     public Bill createBill() {
