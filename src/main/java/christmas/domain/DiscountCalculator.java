@@ -1,4 +1,6 @@
-package christmas;
+package christmas.domain;
+
+import christmas.global.Const;
 
 public class DiscountCalculator {
     // for d-day event, special event, giving-gift event

@@ -1,4 +1,4 @@
-package christmas;
+package christmas.view;
 
 public class OutputView {
     public static void printOrders(String order) {

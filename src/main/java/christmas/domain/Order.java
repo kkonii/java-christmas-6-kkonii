@@ -1,7 +1,8 @@
-package christmas;
+package christmas.domain;
 
 import christmas.exception.ErrorMessage;
 import christmas.exception.InvalidOrderException;
+import christmas.global.Const;
 import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;

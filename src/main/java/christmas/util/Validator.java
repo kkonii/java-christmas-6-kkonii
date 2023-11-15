@@ -1,4 +1,4 @@
-package christmas;
+package christmas.util;
 
 import christmas.exception.ErrorMessage;
 import christmas.exception.InvalidOrderException;

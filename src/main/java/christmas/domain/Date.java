@@ -1,7 +1,8 @@
-package christmas;
+package christmas.domain;
 
 import christmas.exception.ErrorMessage;
 import christmas.exception.InvalidDateException;
+import christmas.global.Const;
 
 public class Date {
     private final Integer date;
