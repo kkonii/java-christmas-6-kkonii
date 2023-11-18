@@ -1,6 +1,5 @@
 package christmas.domain;
 
-import christmas.exception.ErrorMessage;
 import christmas.exception.InvalidDateException;
 import christmas.global.Const;
 
@@ -18,7 +17,7 @@ public class Date {
 
     private void validateRange(int date) {
         if (isNotRequiredRange(date)) {
-            throw InvalidDateException.of(ErrorMessage.NOT_REQUIRED_RANGE);
+            throw InvalidDateException.of();
         }
     }
 

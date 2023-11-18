@@ -1,6 +1,5 @@
 package christmas.util;
 
-import christmas.exception.ErrorMessage;
 import christmas.exception.InvalidDateException;
 import christmas.global.Const;
 import java.util.Arrays;
@@ -18,7 +17,7 @@ public class Converter {
                 .collect(Collectors.toMap(
                         pair -> pair[Const.START_VALUE],
                         pair -> parseToInt(pair[Const.INCREMENT]),
-                        (existedInput, reInput) -> Validator.validateDuplication(existedInput)
+                        (existedInput, reInput) -> Validator.validateDuplication()
                 ));
         return resultMap;
     }
@@ -31,7 +30,7 @@ public class Converter {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw InvalidDateException.of(ErrorMessage.NOT_REQUIRED_RANGE);
+            throw InvalidDateException.of();
         }
     }
 

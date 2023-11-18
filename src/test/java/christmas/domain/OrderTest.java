@@ -1,7 +1,8 @@
-package christmas;
+package christmas.domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+import christmas.exception.ErrorMessage;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,9 +22,9 @@ public class OrderTest {
     public void validateQuantities_ShouldThrowException_WhenOverLimit() {
         assertThatThrownBy(() -> Order.of(Date.from(2), menu))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.");
+                .hasMessageContaining(ErrorMessage.INVALID_ORDER.getMessage());
     }
-    
+
     @Test
     @DisplayName("::존재하지 않는 메뉴가 포함되어 있을 경우 예외가 발생합니다")
     public void Should_ThrowException_When_MenuDoesNotExist() {
@@ -35,6 +36,6 @@ public class OrderTest {
 
         assertThatThrownBy(() -> Order.of(Date.from(2), userOrder))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                .hasMessageContaining(ErrorMessage.INVALID_ORDER.getMessage());
     }
 }

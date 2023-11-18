@@ -32,7 +32,7 @@ public class Order {
         int totalQuantities = calculateTotalQuantity(order);
 
         if (isOverLimit(totalQuantities)) {
-            throw InvalidOrderException.of(ErrorMessage.OVER_LIMIT);
+            throw InvalidOrderException.of();
         }
     }
 

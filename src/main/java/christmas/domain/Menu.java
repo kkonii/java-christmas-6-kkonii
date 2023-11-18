@@ -1,6 +1,5 @@
 package christmas.domain;
 
-import christmas.exception.ErrorMessage;
 import christmas.exception.InvalidOrderException;
 import java.util.Arrays;
 
@@ -48,7 +47,7 @@ public enum Menu {
         return Arrays.stream(Menu.values())
                 .filter(menu -> menu.name.equals(inputName))
                 .findFirst()
-                .orElseThrow(() -> InvalidOrderException.of(ErrorMessage.NOT_EXIST_VALUE));
+                .orElseThrow(() -> InvalidOrderException.of());
     }
 }
 
