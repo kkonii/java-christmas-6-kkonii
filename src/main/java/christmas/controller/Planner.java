@@ -7,7 +7,6 @@ import christmas.util.Converter;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.util.Map;
-import java.util.function.Supplier;
 
 public class Planner {
     public void run() {
@@ -23,27 +22,17 @@ public class Planner {
     }
 
     private Date requestUserDate() {
-        return requestUserInput(() -> {
+        return InputHandler.handle(() -> {
             String userDate = InputView.requestDate();
             return Date.from(Converter.parseToInt(userDate));
         });
     }
 
     private Map<String, Integer> requestUserMenu() {
-        return requestUserInput(() -> {
+        return InputHandler.handle(() -> {
             String userOrder = InputView.requestMenu();
             return Converter.convertToPair(userOrder);
         });
-    }
-
-    private <T> T requestUserInput(Supplier<T> supplier) {
-        while (true) {
-            try {
-                return supplier.get();
-            } catch (IllegalArgumentException e) {
-                OutputView.printError(e.getMessage());
-            }
-        }
     }
 
     private void printBill(Order order, Bill bill) {
