@@ -2,10 +2,6 @@ package christmas.view;
 
 public class OutputView {
 
-    public static void printGeneric(String message) {
-        System.out.println(message);
-    }
-
     public static void printOrders(String order) {
         printWhiteSpace();
         printOrderBanner();

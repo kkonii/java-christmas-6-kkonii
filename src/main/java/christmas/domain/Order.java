@@ -9,8 +9,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Order {
-    private Date date;
-    private Map<Menu, Integer> order;
+    private static final int LIMIT_QUANTITY = 20;
+    private final Date date;
+    private final Map<Menu, Integer> order;
 
     private Order(Date date, Map<Menu, Integer> order) {
         validateQuantities(order);
@@ -55,7 +56,7 @@ public class Order {
     public String processTotalOrders() {
         return order.entrySet().stream()
                 .map(entry -> String.format(Format.ORDER_COUNT, entry.getKey().getName(), entry.getValue()))
-                .collect(Collectors.joining(Const.ENTER));
+                .collect(Collectors.joining(Const.LINE_SEPARATOR));
     }
 
     public Bill createBill() {

@@ -1,9 +1,10 @@
 package christmas.domain;
 
 import christmas.exception.InvalidDateException;
-import christmas.global.Const;
 
 public class Date {
+    private static final int MIN_RANGE = 1;
+    private static final int MAX_RANGE = 31;
     private final Integer date;
 
     private Date(int date) {
@@ -22,7 +23,7 @@ public class Date {
     }
 
     private boolean isNotRequiredRange(int date) {
-        return date < Const.MIN_RANGE || date > Const.MAX_RANGE;
+        return date < MIN_RANGE || date > MAX_RANGE;
     }
 
     public Integer getDate() {

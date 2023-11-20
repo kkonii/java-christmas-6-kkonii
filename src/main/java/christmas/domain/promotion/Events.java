@@ -16,14 +16,14 @@ public enum Events {
             DiscountCalculator::calculateSingleDiscount),
     WEEKDAY_DISCOUNT("평일 할인",
             (date, menu) -> {
-                if (menu.getType().equals(Type.Desserts)) {
+                if (menu.getType().equals(Type.DESSERTS)) {
                     return 2_023;
                 }
                 return 0;
             }, EventCondition.WEEKDAY::findMatchDay, DiscountCalculator::calculateDuplicateDiscount),
     WEEKEND_DISCOUNT("주말 할인",
             (date, menu) -> {
-                if (menu.getType().equals(Type.MainCourse)) {
+                if (menu.getType().equals(Type.MAIN_COURSE)) {
                     return 2_023;
                 }
                 return 0;

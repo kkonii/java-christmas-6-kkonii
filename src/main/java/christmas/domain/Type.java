@@ -1,5 +1,5 @@
 package christmas.domain;
 
 public enum Type {
-    Appetizer, MainCourse, Drinks, Desserts, Promotion;
+    APPETIZER, MAIN_COURSE, DRINKS, DESSERTS, PROMOTION;
 }
