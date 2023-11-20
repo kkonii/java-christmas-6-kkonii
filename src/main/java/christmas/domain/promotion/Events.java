@@ -1,5 +1,8 @@
-package christmas.domain;
+package christmas.domain.promotion;
 
+import christmas.domain.Menu;
+import christmas.domain.Order;
+import christmas.domain.Type;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.function.BiFunction;

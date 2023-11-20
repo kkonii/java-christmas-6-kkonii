@@ -1,5 +1,6 @@
-package christmas.domain;
+package christmas.domain.promotion;
 
+import christmas.domain.Order;
 import christmas.global.Const;
 
 public class DiscountCalculator {

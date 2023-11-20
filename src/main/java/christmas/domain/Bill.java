@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import christmas.domain.promotion.EventCondition;
+import christmas.domain.promotion.Events;
 import christmas.global.Const;
 import java.util.Map;
 import java.util.stream.Collectors;

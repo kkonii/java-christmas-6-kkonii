@@ -1,6 +1,6 @@
 package christmas.domain;
 
-import christmas.exception.ErrorMessage;
+import christmas.domain.promotion.Events;
 import christmas.exception.InvalidOrderException;
 import christmas.global.Const;
 import christmas.global.Format;

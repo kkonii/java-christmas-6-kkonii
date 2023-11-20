@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.promotion;
 
 import java.util.function.BiFunction;
 

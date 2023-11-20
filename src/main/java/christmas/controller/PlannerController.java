@@ -8,7 +8,7 @@ import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.util.Map;
 
-public class Planner {
+public class PlannerController {
     public void run() {
         Date date = requestUserDate();
         Order order = Order.of(date, requestUserMenu());
