@@ -1,7 +1,7 @@
 package christmas.exception;
 
 public class InvalidDateException extends IllegalArgumentException {
-    InvalidDateException(ErrorMessage message) {
+    private InvalidDateException(ErrorMessage message) {
         super(message.getMessage());
     }
 
