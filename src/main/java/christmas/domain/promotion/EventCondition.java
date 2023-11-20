@@ -7,10 +7,10 @@ public enum EventCondition {
             date >= 1 && date <= 25
                     && totalPrice >= 10_000),
     WEEKDAY((date, totalPrice) ->
-            (date % 7) >= 2 && (date % 7) <= 6
+            (date % 7) >= 3 && (date % 7) <= 6
                     && totalPrice >= 10_000),
     WEEKEND((date, totalPrice) ->
-            (date % 7) >= 0 && (date % 7) <= 1
+            (date % 7) == 1 || (date % 7) == 2
                     && totalPrice >= 10_000),
     SPECIAL_DAY((date, totalPrice) ->
             ((date % 7) == 3 || date == 25)
