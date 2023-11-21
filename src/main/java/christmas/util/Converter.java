@@ -33,11 +33,4 @@ public class Converter {
             throw InvalidDateException.of();
         }
     }
-
-    public static String convertToOrder(Map<String, Integer> menuPair) {
-        return menuPair.entrySet()
-                .stream()
-                .map(entry -> String.format("%s %d개", entry.getKey(), entry.getValue()))
-                .collect(Collectors.joining(Const.ENTER));
-    }
 }
