@@ -49,7 +49,7 @@ public record Bill(int totalPrice, Map<Events, Integer> orders) {
         return priceAfterDiscount;
     }
 
-    public String processBadge() {
+    public Badge processBadge() {
         return Badge.findMatchBadge(
                 processBenefitPrice()
         );

@@ -1,5 +1,7 @@
 package christmas.view;
 
+import christmas.domain.Badge;
+
 public class OutputView {
 
     public static void printOrders(String order) {
@@ -76,10 +78,10 @@ public class OutputView {
         System.out.println("<할인 후 예상 결제 금액>");
     }
 
-    public static void printEventBadge(String badgeName) {
+    public static void printEventBadge(Badge badge) {
         printWhiteSpace();
         printBadgeBanner();
-        System.out.println(badgeName);
+        System.out.println(badge.getTitle());
     }
 
     private static void printBadgeBanner() {

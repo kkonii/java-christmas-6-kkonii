@@ -17,15 +17,14 @@ public enum Badge {
         this.condition = condition;
     }
 
-    public static String findMatchBadge(Integer amount) {
+    public static Badge findMatchBadge(Integer amount) {
         return Arrays.stream(Badge.values())
                 .filter(badge -> badge.condition.test(amount))
                 .findFirst()
-                .map(Badge::getTitle)
-                .orElse(NONE_BADGE.getTitle());
+                .orElse(NONE_BADGE);
     }
 
-    private String getTitle() {
+    public String getTitle() {
         return title;
     }
 }
