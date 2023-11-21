@@ -15,6 +15,7 @@ public class Order {
 
     private Order(Date date, Map<Menu, Integer> order) {
         validateQuantities(order);
+        validateMenuType(order);
         this.date = date;
         this.order = order;
     }
@@ -42,7 +43,18 @@ public class Order {
     }
 
     private boolean isOverLimit(int quantities) {
-        return quantities > Const.LIMIT_QUANTITY;
+        return quantities > LIMIT_QUANTITY;
+    }
+
+    private void validateMenuType(Map<Menu, Integer> order) {
+        if (isOnlyDrinkType(order)) {
+            throw InvalidOrderException.of();
+        }
+    }
+
+    private boolean isOnlyDrinkType(Map<Menu, Integer> order) {
+        return order.isEmpty() || order.keySet().stream()
+                .allMatch(menu -> menu.getType() == Type.DRINKS);
     }
 
     public Integer getDate() {
