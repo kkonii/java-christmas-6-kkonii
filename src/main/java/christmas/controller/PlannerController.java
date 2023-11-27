@@ -3,15 +3,23 @@ package christmas.controller;
 import christmas.domain.Bill;
 import christmas.domain.Date;
 import christmas.domain.Order;
+import christmas.domain.OrderItem;
+import christmas.service.OrderService;
 import christmas.util.Converter;
 import christmas.view.InputView;
 import christmas.view.OutputView;
-import java.util.Map;
+import java.util.List;
 
 public class PlannerController {
+    private final OrderService orderService;
+
+    public PlannerController(OrderService orderService) {
+        this.orderService = orderService;
+    }
+
     public void run() {
         Date date = requestUserDate();
-        Order order = Order.of(date, requestUserMenu());
+        Order order = requestUserMenu(date);
         Bill bill = order.createBill();
 
         OutputView.printPreviewBanner(
@@ -28,10 +36,11 @@ public class PlannerController {
         });
     }
 
-    private Map<String, Integer> requestUserMenu() {
+    private Order requestUserMenu(Date date) {
         return InputHandler.handle(() -> {
             String userOrder = InputView.requestMenu();
-            return Converter.convertToPair(userOrder);
+            List<OrderItem> orderItems = orderService.splitMenus(userOrder);
+            return Order.of(date, orderItems);
         });
     }
 

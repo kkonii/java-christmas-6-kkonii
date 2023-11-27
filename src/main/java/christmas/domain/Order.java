@@ -4,70 +4,69 @@ import christmas.domain.promotion.Events;
 import christmas.exception.InvalidOrderException;
 import christmas.global.Const;
 import christmas.global.Format;
-import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Order {
     private static final int LIMIT_QUANTITY = 20;
     private final Date date;
-    private final Map<Menu, Integer> order;
+    private final List<OrderItem> orderItems;
 
-    private Order(Date date, Map<Menu, Integer> order) {
-        validateQuantities(order);
-        validateMenuType(order);
+    /* 온리음료, 같은 메뉴 주문, 20개 초과 검증*/
+    private Order(Date date, List<OrderItem> orderItems) {
+        validateQuantities(orderItems);
+        validateMenuType(orderItems);
         this.date = date;
-        this.order = order;
+        this.orderItems = orderItems;
     }
 
-    public static Order of(Date date, Map<String, Integer> userOrder) {
-        Map<Menu, Integer> order = userOrder.entrySet().stream()
-                .collect(Collectors.toMap(
-                        userMenu -> Menu.findMatchMenu(userMenu.getKey()),
-                        Map.Entry::getValue
-                ));
-
-        return new Order(date, order);
+    public static Order of(Date date, List<OrderItem> orderItems) {
+        return new Order(date, orderItems);
     }
 
-    private void validateQuantities(Map<Menu, Integer> order) {
-        int totalQuantities = calculateTotalQuantity(order);
+    private void validateQuantities(List<OrderItem> orderItems) {
+        int totalQuantities = calculateTotalQuantity(orderItems);
 
         if (isOverLimit(totalQuantities)) {
             throw InvalidOrderException.of();
         }
     }
 
-    private int calculateTotalQuantity(Map<Menu, Integer> order) {
-        return order.values().stream().mapToInt(Integer::intValue).sum();
+    private int calculateTotalQuantity(List<OrderItem> orderItems) {
+        return orderItems.stream()
+                .mapToInt(OrderItem::getCount)
+                .sum();
     }
 
     private boolean isOverLimit(int quantities) {
         return quantities > LIMIT_QUANTITY;
     }
 
-    private void validateMenuType(Map<Menu, Integer> order) {
-        if (isOnlyDrinkType(order)) {
+    private void validateMenuType(List<OrderItem> orderItems) {
+        if (isOnlyDrinkType(orderItems)) {
             throw InvalidOrderException.of();
         }
     }
 
-    private boolean isOnlyDrinkType(Map<Menu, Integer> order) {
-        return order.isEmpty() || order.keySet().stream()
-                .allMatch(menu -> menu.getType() == Type.DRINKS);
+    private boolean isOnlyDrinkType(List<OrderItem> orderItems) {
+        return orderItems.stream()
+                .allMatch(orderItem -> orderItem.getMenu().getType() == Type.DRINKS);
     }
 
     public Integer getDate() {
         return date.getDate();
     }
 
-    public Map<Menu, Integer> getOrder() {
-        return Collections.unmodifiableMap(this.order);
+    public List<OrderItem> getOrder() {
+        return List.copyOf(this.orderItems);
     }
 
+    // is service Logic
     public String processTotalOrders() {
-        return order.entrySet().stream()
-                .map(entry -> String.format(Format.ORDER_COUNT, entry.getKey().getName(), entry.getValue()))
+        return orderItems.stream()
+                .map(orderItem -> String.format(Format.ORDER_COUNT, orderItem.getMenu().getName(),
+                        orderItem.getCount()))
                 .collect(Collectors.joining(Const.LINE_SEPARATOR));
     }
 
@@ -78,10 +77,8 @@ public class Order {
     }
 
     public int calculateTotalPrice() {
-        return this.order.entrySet().stream()
-                .mapToInt(entry ->
-                        entry.getKey().getPrice() * entry.getValue()
-                )
+        return orderItems.stream()
+                .mapToInt(orderItem -> orderItem.getMenu().getPrice() * orderItem.getCount())
                 .sum();
     }
 
@@ -93,6 +90,7 @@ public class Order {
                 ));
     }
 
+    // cast to Integer
     private Map<Events, Long> countAppliedEvents() {
         return Events.findMatchEvents(
                 date.getDate(), calculateTotalPrice()
