@@ -4,8 +4,10 @@ import christmas.domain.promotion.Events;
 import christmas.exception.InvalidOrderException;
 import christmas.global.Const;
 import christmas.global.Format;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Order {
@@ -15,8 +17,9 @@ public class Order {
 
     /* 온리음료, 같은 메뉴 주문, 20개 초과 검증*/
     private Order(Date date, List<OrderItem> orderItems) {
-        validateQuantities(orderItems);
+        validateDuplication(orderItems);
         validateMenuType(orderItems);
+        validateQuantities(orderItems);
         this.date = date;
         this.orderItems = orderItems;
     }
@@ -52,6 +55,20 @@ public class Order {
     private boolean isOnlyDrinkType(List<OrderItem> orderItems) {
         return orderItems.stream()
                 .allMatch(orderItem -> orderItem.getMenu().getType() == Type.DRINKS);
+    }
+
+    private void validateDuplication(List<OrderItem> orderItems) {
+        if (hasDuplication(orderItems)) {
+            throw InvalidOrderException.of();
+        }
+    }
+
+    private boolean hasDuplication(List<OrderItem> orderItems) {
+        Set<String> menuNames = new HashSet<>();
+
+        return orderItems.stream()
+                .map(orderItem -> orderItem.getMenu().getName())
+                .anyMatch(name -> !menuNames.add(name));
     }
 
     public Integer getDate() {
