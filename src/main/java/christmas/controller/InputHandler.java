@@ -1,6 +1,5 @@
 package christmas.controller;
 
-import christmas.view.OutputView;
 import java.util.function.Supplier;
 
 public class InputHandler {
@@ -9,7 +8,7 @@ public class InputHandler {
             try {
                 return supplier.get();
             } catch (IllegalArgumentException e) {
-                OutputView.printError(e.getMessage());
+                System.out.println(e.getMessage());
             }
         }
     }

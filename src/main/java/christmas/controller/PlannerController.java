@@ -11,9 +11,13 @@ import christmas.view.OutputView;
 import java.util.List;
 
 public class PlannerController {
+    private final InputView inputView;
+    private final OutputView outputView;
     private final OrderService orderService;
 
-    public PlannerController(OrderService orderService) {
+    public PlannerController(InputView inputView, OutputView outputView, OrderService orderService) {
+        this.inputView = inputView;
+        this.outputView = outputView;
         this.orderService = orderService;
     }
 
@@ -22,7 +26,7 @@ public class PlannerController {
         final Order order = requestUserMenu(date);
         Bill bill = order.createBill();
 
-        OutputView.printPreviewBanner(
+        outputView.printPreviewBanner(
                 date.getDate()
         );
 
@@ -31,33 +35,33 @@ public class PlannerController {
 
     private Date requestUserDate() {
         return InputHandler.handle(() -> {
-            String userDate = InputView.requestDate();
+            String userDate = inputView.requestDate();
             return Date.from(Converter.parseToInt(userDate));
         });
     }
 
     private Order requestUserMenu(Date date) {
         return InputHandler.handle(() -> {
-            String userOrder = InputView.requestMenu();
+            String userOrder = inputView.requestMenu();
             List<OrderItem> orderItems = orderService.splitMenus(userOrder);
             return Order.of(date, orderItems);
         });
     }
 
     private void printBill(Order order, Bill bill) {
-        OutputView.printOrders(order.processTotalOrders());
+        outputView.printOrders(order.processTotalOrders());
 
-        OutputView.printTotalPrice(order.calculateTotalPrice());
+        outputView.printTotalPrice(order.calculateTotalPrice());
 
-        OutputView.printPromotion(bill.processPromotion());
+        outputView.printPromotion(bill.processPromotion());
 
-        OutputView.printBenefits(bill.processTotalBenefits());
+        outputView.printBenefits(bill.processTotalBenefits());
 
-        OutputView.printTotalBenefitPrice(bill.processBenefitPrice());
+        outputView.printTotalBenefitPrice(bill.processBenefitPrice());
 
-        OutputView.printExpectedPrice(bill.processExpectedPrice());
+        outputView.printExpectedPrice(bill.processExpectedPrice());
 
-        OutputView.printEventBadge(bill.processBadge());
+        outputView.printEventBadge(bill.processBadge());
     }
 
 }
