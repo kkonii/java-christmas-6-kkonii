@@ -5,7 +5,7 @@ import christmas.exception.InvalidDateException;
 public class Date {
     private static final int MIN_RANGE = 1;
     private static final int MAX_RANGE = 31;
-    private final Integer date;
+    private final int date;
 
     private Date(int date) {
         validateRange(date);

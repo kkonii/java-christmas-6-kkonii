@@ -18,8 +18,8 @@ public class PlannerController {
     }
 
     public void run() {
-        Date date = requestUserDate();
-        Order order = requestUserMenu(date);
+        final Date date = requestUserDate();
+        final Order order = requestUserMenu(date);
         Bill bill = order.createBill();
 
         OutputView.printPreviewBanner(
