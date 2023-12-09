@@ -1,7 +1,6 @@
 package christmas.domain;
 
 import christmas.domain.promotion.PromotionItem;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,14 +11,14 @@ public class Reservation {
     private final AppliedDiscount appliedDiscount;
     private List<PromotionItem> promotionBox;
 
-    private Reservation(Order order, AppliedDiscount appliedDiscount) {
+    private Reservation(Order order, AppliedDiscount appliedDiscount, List<PromotionItem> promotion) {
         this.order = order;
         this.appliedDiscount = appliedDiscount;
-        this.promotionBox = new ArrayList<>();
+        this.promotionBox = promotion;
     }
 
-    public static Reservation createFrom(Order order, AppliedDiscount appliedDiscount) {
-        return new Reservation(order, appliedDiscount);
+    public static Reservation createFrom(Order order, AppliedDiscount appliedDiscount, List<PromotionItem> promotion) {
+        return new Reservation(order, appliedDiscount, promotion);
     }
 
     public VisitingDate getVisitingDate() {
@@ -31,10 +30,6 @@ public class Reservation {
      */
     public boolean hasNoPromotion() {
         return promotionBox.isEmpty();
-    }
-
-    public void addPromotion(PromotionItem promotionItem) {
-        promotionBox.add(promotionItem);
     }
 
     /**

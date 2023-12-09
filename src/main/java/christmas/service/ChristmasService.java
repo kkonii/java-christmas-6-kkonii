@@ -4,6 +4,8 @@ import christmas.domain.AppliedDiscount;
 import christmas.domain.Order;
 import christmas.domain.Reservation;
 import christmas.domain.promotion.Discount;
+import christmas.domain.promotion.PromotionItem;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
@@ -15,7 +17,7 @@ public class ChristmasService {
         if (order.calculatePrice() >= 1_000) {
             appliedDiscounts = createFrom(order);
         }
-        return Reservation.createFrom(order, appliedDiscounts);
+        return Reservation.createFrom(order, appliedDiscounts, applyGiftPromotion(order));
     }
 
     private AppliedDiscount createFrom(Order order) {
@@ -34,5 +36,16 @@ public class ChristmasService {
                 .flatMap(orderItem -> Arrays.stream(Discount.values())
                         .filter(discount -> discount.isApplicable(order.getVisitingDate(), orderItem)))
                 .toList();
+    }
+
+    /**
+     * 이벤트 증정
+     */
+    private List<PromotionItem> applyGiftPromotion(Order order) {
+        List<PromotionItem> promotionItems = new ArrayList<>();
+        if (order.calculatePrice() >= 25_000) {
+            promotionItems.add(PromotionItem.GIFT);
+        }
+        return promotionItems;
     }
 }
