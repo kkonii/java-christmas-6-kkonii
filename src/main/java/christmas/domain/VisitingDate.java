@@ -19,4 +19,8 @@ public class VisitingDate {
             throw InvalidDateException.of();
         }
     }
+
+    public int getDay() {
+        return date;
+    }
 }
