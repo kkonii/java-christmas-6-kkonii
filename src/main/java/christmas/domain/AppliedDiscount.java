@@ -29,4 +29,15 @@ public class AppliedDiscount {
             discounts.put(Discount.SPECIAL, 1);
         }
     }
+
+    /**
+     * 적용된 할인금 계산
+     **/
+    public int processDiscount(Order order) {
+        int totalDiscount = 0;
+        for (Discount discount : discounts.keySet()) {
+            totalDiscount += discount.getDiscountPrice(order);
+        }
+        return totalDiscount;
+    }
 }
