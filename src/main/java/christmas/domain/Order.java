@@ -7,17 +7,19 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Order {
+    private final VisitingDate visitingDate;
     private final List<OrderItem> orderItems;
 
-    private Order(List<OrderItem> orderItems) {
+    private Order(VisitingDate visitingDate, List<OrderItem> orderItems) {
         validateDuplication(orderItems);
         validateOnlyDrinks(orderItems);
         validateQuantities(orderItems);
+        this.visitingDate = visitingDate;
         this.orderItems = orderItems;
     }
 
-    public static Order from(List<OrderItem> orderItems) {
-        return new Order(orderItems);
+    public static Order from(VisitingDate date, List<OrderItem> orderItems) {
+        return new Order(date, orderItems);
     }
 
     private void validateQuantities(List<OrderItem> orderItems) {
@@ -49,6 +51,14 @@ public class Order {
 
     private boolean isAllDrinks(List<OrderItem> orderItems) {
         return orderItems.stream().allMatch(OrderItem::isDrink);
+    }
+
+    public VisitingDate getVisitingDate() {
+        return visitingDate;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return List.copyOf(orderItems);
     }
 
     /**

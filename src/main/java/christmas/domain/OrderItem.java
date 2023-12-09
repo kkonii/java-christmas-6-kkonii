@@ -35,4 +35,14 @@ public class OrderItem {
     public boolean isDrink() {
         return menu.getCategory().equals(Category.DRINKS);
     }
+
+    public boolean isWeekendMenu() {
+        return menu.getCategory().equals(Category.MAIN_DISH);
+    }
+
+    public boolean isWeekdayMenu() {
+        return menu.getCategory().equals(Category.DESSERTS);
+    }
 }
+
+
