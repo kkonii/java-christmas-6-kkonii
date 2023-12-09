@@ -1,7 +1,9 @@
 package christmas.controller;
 
 import christmas.domain.Order;
+import christmas.domain.Reservation;
 import christmas.domain.VisitingDate;
+import christmas.service.ChristmasService;
 import christmas.util.Parser;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -9,19 +11,22 @@ import christmas.view.OutputView;
 public class ChristmasController {
     private final InputView inputView;
     private final OutputView outputView;
+    private final ChristmasService christmasService;
 
-    private ChristmasController(InputView inputView, OutputView outputView) {
+    private ChristmasController(InputView inputView, OutputView outputView, ChristmasService christmasService) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.christmasService = christmasService;
     }
 
     public static ChristmasController setUp() {
-        return new ChristmasController(new InputView(), new OutputView());
+        return new ChristmasController(new InputView(), new OutputView(), new ChristmasService());
     }
 
     public void run() {
         VisitingDate date = createDate();
-        Order order = createOrder();
+        Order order = createOrder(date);
+        Reservation reservation = christmasService.createReservation(order);
     }
 
     private VisitingDate createDate() {
@@ -31,10 +36,10 @@ public class ChristmasController {
         });
     }
 
-    private Order createOrder() {
+    private Order createOrder(VisitingDate date) {
         return InputHandler.handle(() -> {
             String order = inputView.requestOrder();
-            return Order.from(Parser.createOrderItems(order));
+            return Order.from(date, Parser.createOrderItems(order));
         });
     }
 }
