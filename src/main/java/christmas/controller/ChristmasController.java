@@ -19,6 +19,7 @@ public class ChristmasController {
 
     public void run() {
         VisitingDate date = createDate();
+        String order = requestOrder();
     }
 
     private VisitingDate createDate() {
@@ -26,5 +27,9 @@ public class ChristmasController {
             int date = inputView.requestDate();
             return VisitingDate.from(date);
         });
+    }
+
+    private String requestOrder() {
+        return InputHandler.handle(inputView::requestOrder);
     }
 }
