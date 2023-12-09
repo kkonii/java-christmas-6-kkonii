@@ -10,7 +10,11 @@ import java.util.List;
 
 public class ChristmasService {
     public Reservation createReservation(Order order) {
-        AppliedDiscount appliedDiscounts = createFrom(order);
+        AppliedDiscount appliedDiscounts = AppliedDiscount.from(new EnumMap<>(Discount.class));
+
+        if (order.calculatePrice() >= 1_000) {
+            appliedDiscounts = createFrom(order);
+        }
         return Reservation.createFrom(order, appliedDiscounts);
     }
 
