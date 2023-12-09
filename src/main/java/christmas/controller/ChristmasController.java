@@ -1,6 +1,8 @@
 package christmas.controller;
 
+import christmas.domain.Order;
 import christmas.domain.VisitingDate;
+import christmas.util.Parser;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -19,7 +21,7 @@ public class ChristmasController {
 
     public void run() {
         VisitingDate date = createDate();
-        String order = requestOrder();
+        Order order = createOrder();
     }
 
     private VisitingDate createDate() {
@@ -29,7 +31,10 @@ public class ChristmasController {
         });
     }
 
-    private String requestOrder() {
-        return InputHandler.handle(inputView::requestOrder);
+    private Order createOrder() {
+        return InputHandler.handle(() -> {
+            String order = inputView.requestOrder();
+            return Order.from(Parser.createOrderItems(order));
+        });
     }
 }
