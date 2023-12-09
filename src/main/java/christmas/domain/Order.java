@@ -50,4 +50,13 @@ public class Order {
     private boolean isAllDrinks(List<OrderItem> orderItems) {
         return orderItems.stream().allMatch(OrderItem::isDrink);
     }
+
+    /**
+     * 총 결제 금액 (할인 전)
+     */
+    public int calculatePrice() {
+        return orderItems.stream()
+                .mapToInt(orderItem -> orderItem.getEachQuantity() * orderItem.getEachMenu().getPrice())
+                .sum();
+    }
 }
