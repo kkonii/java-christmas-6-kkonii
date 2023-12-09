@@ -36,4 +36,8 @@ public enum Discount {
     public int getDiscountPrice(Order order) {
         return discount.apply(order);
     }
+
+    public String getTitle() {
+        return title;
+    }
 }

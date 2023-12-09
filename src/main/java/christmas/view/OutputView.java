@@ -6,22 +6,23 @@ import christmas.domain.promotion.Badge;
 
 public class OutputView {
     private final static String MENU_QUANTITY_FORMAT = "%s %d개";
-    private static final String PRICE_FORMAT = ",%d원";
-    private static final String HISTORY_FORMAT = "%d: ,%d원";
+    private static final String PRICE_FORMAT = "%,d원";
+    private static final String HISTORY_FORMAT = "%s: %,d원";
 
     public void printOrderAndQuantities(Order order) {
         System.out.println();
         System.out.println("<주문 메뉴>");
         order.getOrderItems().forEach(
-                orderItem -> System.out.print(String.format(
+                orderItem -> System.out.println(String.format(
                         MENU_QUANTITY_FORMAT,
-                        orderItem.getEachMenu().name(),
+                        orderItem.getEachMenu().getName(),
                         orderItem.getEachQuantity())
                 ));
     }
 
     public void printBeforeDiscountPrice(Order order) {
         System.out.println();
+        System.out.println("<할인 전 총주문 금액>");
         System.out.println(String.format(PRICE_FORMAT, order.calculatePrice()));
     }
 
@@ -34,7 +35,9 @@ public class OutputView {
         if (!reservation.hasNoPromotion()) {
             reservation.getPromotionBox()
                     .forEach(promotionItem -> System.out.println(
-                            String.format(MENU_QUANTITY_FORMAT, promotionItem.name(), promotionItem.getQuantity())
+                            String.format(MENU_QUANTITY_FORMAT,
+                                    promotionItem.getGift().getName(),
+                                    promotionItem.getQuantity())
                     ));
         }
     }
@@ -43,7 +46,7 @@ public class OutputView {
         System.out.println();
         System.out.println("<혜택 내역>");
         reservation.getAppliedDiscount().entrySet().stream()
-                .forEach(entry -> System.out.println(String.format(HISTORY_FORMAT, entry.getKey(),
+                .forEach(entry -> System.out.println(String.format(HISTORY_FORMAT, entry.getKey().getTitle(),
                         entry.getValue() * entry.getKey().getDiscountPrice(order) * -1)));
     }
 
@@ -62,6 +65,6 @@ public class OutputView {
     public void printGivenBadge(Reservation reservation) {
         System.out.println();
         System.out.println("12월 이벤트 배지");
-        System.out.println(Badge.findMatchBadge(reservation.calculateBenefitPrices()).name());
+        System.out.println(Badge.findMatchBadge(reservation.calculateBenefitPrices()).getBadgeTitle());
     }
 }

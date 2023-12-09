@@ -16,6 +16,10 @@ public enum PromotionItem {
         this.quantity = quantity;
     }
 
+    public Menu getGift() {
+        return menu;
+    }
+
     public int getQuantity() {
         return quantity;
     }

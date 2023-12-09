@@ -41,6 +41,10 @@ public enum Menu {
         return category;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public int getPrice() {
         return price;
     }
