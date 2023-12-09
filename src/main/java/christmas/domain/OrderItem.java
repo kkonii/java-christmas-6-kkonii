@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import christmas.domain.menu.Category;
 import christmas.domain.menu.Menu;
 import christmas.exception.InvalidOrderException;
 
@@ -25,5 +26,13 @@ public class OrderItem {
 
     public int getEachQuantity() {
         return quantity;
+    }
+
+    public Menu getEachMenu() {
+        return menu;
+    }
+
+    public boolean isDrink() {
+        return menu.getCategory().equals(Category.DRINKS);
     }
 }

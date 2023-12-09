@@ -36,4 +36,8 @@ public enum Menu {
                 .findFirst()
                 .orElseThrow(InvalidOrderException::of);
     }
+
+    public Category getCategory() {
+        return category;
+    }
 }
