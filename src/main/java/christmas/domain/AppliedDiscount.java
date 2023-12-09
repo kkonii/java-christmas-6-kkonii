@@ -5,6 +5,7 @@ import java.util.EnumMap;
 
 /**
  * 적용된 이벤트와 그 수량을 저장
+ * TODO:리팩토링 시 : Integer를 금액으로 바꿀 것
  */
 public class AppliedDiscount {
     private final EnumMap<Discount, Integer> discounts;
@@ -38,6 +39,8 @@ public class AppliedDiscount {
         for (Discount discount : discounts.keySet()) {
             totalDiscount += discount.getDiscountPrice(order) * discounts.get(discount);
         }
-        return totalDiscount;
+        return totalDiscount * -1;
     }
+
+    /** 각각의 할인금 계산 */
 }

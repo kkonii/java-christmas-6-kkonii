@@ -17,7 +17,7 @@ public enum Badge {
         this.priceCondition = priceCondition;
     }
 
-    public Badge findMatchBadge(int price) {
+    public static Badge findMatchBadge(int price) {
         return Arrays.stream(Badge.values())
                 .filter(badge -> badge.priceCondition.test(price))
                 .findFirst()

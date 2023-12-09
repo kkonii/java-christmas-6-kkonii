@@ -36,6 +36,21 @@ public class Reservation {
      * 총 할인후 결제금 계산
      */
     public int calculateDiscountPrices() {
-        return order.calculatePrice() - appliedDiscount.processDiscount(this.order);
+        return order.calculatePrice() + appliedDiscount.processDiscount(this.order);
+    }
+
+    /**
+     * 총 혜택 금액
+     */
+    public int calculateBenefitPrices() {
+        return appliedDiscount.processDiscount(this.order);
+    }
+
+    public List<PromotionItem> getPromotionBox() {
+        return List.copyOf(promotionBox);
+    }
+
+    public AppliedDiscount getAppliedDiscount() {
+        return appliedDiscount;
     }
 }

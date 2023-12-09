@@ -27,6 +27,7 @@ public class ChristmasController {
         VisitingDate date = createDate();
         Order order = createOrder(date);
         Reservation reservation = christmasService.createReservation(order);
+        createBills(order, reservation);
     }
 
     private VisitingDate createDate() {
@@ -41,5 +42,15 @@ public class ChristmasController {
             String order = inputView.requestOrder();
             return Order.from(date, Parser.createOrderItems(order));
         });
+    }
+
+    private void createBills(Order order, Reservation reservation) {
+        outputView.printOrderAndQuantities(order);
+        outputView.printBeforeDiscountPrice(order);
+        outputView.printGivenGift(reservation);
+        //TODO: 혜택 내역 출력
+        outputView.printBenefitPrices(reservation);
+        outputView.printAfterDiscountPrice(reservation);
+        outputView.printGivenBadge(reservation);
     }
 }

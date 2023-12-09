@@ -15,4 +15,8 @@ public enum PromotionItem {
         this.menu = menu;
         this.quantity = quantity;
     }
+
+    public int getQuantity() {
+        return quantity;
+    }
 }
