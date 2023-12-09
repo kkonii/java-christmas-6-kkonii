@@ -1,6 +1,8 @@
 package christmas.domain;
 
+import christmas.domain.promotion.Discount;
 import christmas.domain.promotion.PromotionItem;
+import java.util.EnumMap;
 import java.util.List;
 
 /**
@@ -50,7 +52,7 @@ public class Reservation {
         return List.copyOf(promotionBox);
     }
 
-    public AppliedDiscount getAppliedDiscount() {
-        return appliedDiscount;
+    public EnumMap<Discount, Integer> getAppliedDiscount() {
+        return appliedDiscount.getAppliedDiscounts();
     }
 }

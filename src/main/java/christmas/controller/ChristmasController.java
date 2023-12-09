@@ -48,7 +48,7 @@ public class ChristmasController {
         outputView.printOrderAndQuantities(order);
         outputView.printBeforeDiscountPrice(order);
         outputView.printGivenGift(reservation);
-        //TODO: 혜택 내역 출력
+        outputView.printBenefitHistory(reservation, order);
         outputView.printBenefitPrices(reservation);
         outputView.printAfterDiscountPrice(reservation);
         outputView.printGivenBadge(reservation);

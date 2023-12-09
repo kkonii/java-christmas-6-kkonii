@@ -7,6 +7,7 @@ import christmas.domain.promotion.Badge;
 public class OutputView {
     private final static String MENU_QUANTITY_FORMAT = "%s %d개";
     private static final String PRICE_FORMAT = ",%d원";
+    private static final String HISTORY_FORMAT = "%d: ,%d원";
 
     public void printOrderAndQuantities(Order order) {
         System.out.println();
@@ -38,9 +39,12 @@ public class OutputView {
         }
     }
 
-    public void printBenefitHistory(Reservation reservation) {
+    public void printBenefitHistory(Reservation reservation, Order order) {
         System.out.println();
         System.out.println("<혜택 내역>");
+        reservation.getAppliedDiscount().entrySet().stream()
+                .forEach(entry -> System.out.println(String.format(HISTORY_FORMAT, entry.getKey(),
+                        entry.getValue() * entry.getKey().getDiscountPrice(order) * -1)));
     }
 
     public void printBenefitPrices(Reservation reservation) {

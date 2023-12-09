@@ -42,5 +42,7 @@ public class AppliedDiscount {
         return totalDiscount * -1;
     }
 
-    /** 각각의 할인금 계산 */
+    public EnumMap<Discount, Integer> getAppliedDiscounts() {
+        return discounts;
+    }
 }
