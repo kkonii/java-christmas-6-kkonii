@@ -22,10 +22,10 @@ public class AppliedDiscount {
      * 디데이 할인과 특별 할인의 수량이 있는 경우 중복수량을 없앤다
      */
     private void distinctMultipleApplied(EnumMap<Discount, Integer> discounts) {
-        if (discounts.containsKey(Discount.DAILY)) {
+        if (discounts.containsKey(Discount.DAILY) && discounts.get(Discount.DAILY) != null) {
             discounts.put(Discount.DAILY, 1);
         }
-        if (discounts.containsKey(Discount.SPECIAL)) {
+        if (discounts.containsKey(Discount.SPECIAL) && discounts.get(Discount.SPECIAL) != null) {
             discounts.put(Discount.SPECIAL, 1);
         }
     }
@@ -36,7 +36,7 @@ public class AppliedDiscount {
     public int processDiscount(Order order) {
         int totalDiscount = 0;
         for (Discount discount : discounts.keySet()) {
-            totalDiscount += discount.getDiscountPrice(order);
+            totalDiscount += discount.getDiscountPrice(order) * discounts.get(discount);
         }
         return totalDiscount;
     }
