@@ -2,12 +2,17 @@ package christmas.view;
 
 import christmas.domain.Order;
 import christmas.domain.Reservation;
+import christmas.domain.VisitingDate;
 import christmas.domain.promotion.Badge;
 
 public class OutputView {
     private final static String MENU_QUANTITY_FORMAT = "%s %d개";
     private static final String PRICE_FORMAT = "%,d원";
     private static final String HISTORY_FORMAT = "%s: %,d원";
+
+    public void printVisitingDate(VisitingDate date) {
+        System.out.println("12월 " + date.getDay() + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
+    }
 
     public void printOrderAndQuantities(Order order) {
         System.out.println();

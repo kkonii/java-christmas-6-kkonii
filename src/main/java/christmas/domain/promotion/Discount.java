@@ -8,7 +8,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public enum Discount {
-    DAILY("디데이 할인", DailyCalculator::calculateDiscountPrice, VisitingDateChecker::isDaily, orderItem -> true),
+    DAILY("크리스마스 디데이 할인", DailyCalculator::calculateDiscountPrice, VisitingDateChecker::isDaily, orderItem -> true),
     WEEKDAYS("평일 할인", WeekdayCalculator::calculateDiscountPrice, VisitingDateChecker::isWeekday,
             OrderItem::isWeekdayMenu),
     WEEKENDS("주말 할인", WeekendCalculator::calculateDiscountPrice, VisitingDateChecker::isWeekend,

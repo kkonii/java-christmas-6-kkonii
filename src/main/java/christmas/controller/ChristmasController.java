@@ -27,7 +27,7 @@ public class ChristmasController {
         VisitingDate date = createDate();
         Order order = createOrder(date);
         Reservation reservation = christmasService.createReservation(order);
-        createBills(order, reservation);
+        createBills(date, order, reservation);
     }
 
     private VisitingDate createDate() {
@@ -44,7 +44,8 @@ public class ChristmasController {
         });
     }
 
-    private void createBills(Order order, Reservation reservation) {
+    private void createBills(VisitingDate date, Order order, Reservation reservation) {
+        outputView.printVisitingDate(date);
         outputView.printOrderAndQuantities(order);
         outputView.printBeforeDiscountPrice(order);
         outputView.printGivenGift(reservation);
