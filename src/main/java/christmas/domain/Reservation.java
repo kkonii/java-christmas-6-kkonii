@@ -34,6 +34,10 @@ public class Reservation {
         return promotionBox.isEmpty();
     }
 
+    public List<PromotionItem> getPromotionItems() {
+        return List.copyOf(promotionBox);
+    }
+
     /**
      * 총 할인후 결제금 계산
      */
@@ -45,7 +49,8 @@ public class Reservation {
      * 총 혜택 금액
      */
     public int calculateBenefitPrices() {
-        return appliedDiscount.processDiscount(this.order);
+        return appliedDiscount.processDiscount(this.order) + promotionBox.stream()
+                .mapToInt(promotionItem -> promotionItem.getGift().getPrice()).sum() * -1;
     }
 
     public List<PromotionItem> getPromotionBox() {

@@ -59,6 +59,12 @@ public class OutputView {
                     .forEach(entry -> System.out.println(String.format(HISTORY_FORMAT, entry.getKey().getTitle(),
                             entry.getValue() * entry.getKey().getDiscountPrice(order) * -1)));
         }
+        if (!reservation.hasNoPromotion()) {
+            reservation.getPromotionItems().forEach(
+                    promotionItem -> System.out.println(String.format(HISTORY_FORMAT, promotionItem.getGift().getName(),
+                            promotionItem.getGift().getPrice() * -1)
+                    ));
+        }
     }
 
     public void printBenefitPrices(Reservation reservation) {
