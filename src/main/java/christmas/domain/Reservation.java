@@ -49,8 +49,12 @@ public class Reservation {
      * 총 혜택 금액
      */
     public int calculateBenefitPrices() {
-        return appliedDiscount.processDiscount(this.order) + promotionBox.stream()
-                .mapToInt(promotionItem -> promotionItem.getGift().getPrice()).sum() * -1;
+        return appliedDiscount.processDiscount(this.order) + calculatePromotionPrices();
+    }
+
+    private int calculatePromotionPrices() {
+        return promotionBox.stream()
+                .mapToInt(promotionItem -> promotionItem.getGift().getPrice() * -1).sum();
     }
 
     public List<PromotionItem> getPromotionBox() {
