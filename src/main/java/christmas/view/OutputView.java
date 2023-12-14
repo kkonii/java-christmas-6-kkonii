@@ -51,7 +51,7 @@ public class OutputView {
     public void printBenefitHistory(Reservation reservation, Order order) {
         System.out.println();
         System.out.println("<혜택 내역>");
-        if (reservation.hasNoAppliedDiscounts()) {
+        if (reservation.hasNoAppliedDiscounts() && reservation.hasNoPromotion()) {
             System.out.println(NONE_VALUE);
         }
         if (!reservation.hasNoAppliedDiscounts()) {
@@ -61,7 +61,7 @@ public class OutputView {
         }
         if (!reservation.hasNoPromotion()) {
             reservation.getPromotionItems().forEach(
-                    promotionItem -> System.out.println(String.format(HISTORY_FORMAT, promotionItem.getGift().getName(),
+                    promotionItem -> System.out.println(String.format(HISTORY_FORMAT, promotionItem.getPromotionTitle(),
                             promotionItem.getGift().getPrice() * -1)
                     ));
         }
