@@ -19,7 +19,7 @@ public enum Badge {
 
     public static Badge findMatchBadge(int price) {
         return Arrays.stream(Badge.values())
-                .filter(badge -> badge.priceCondition.test(price))
+                .filter(badge -> badge.priceCondition.test(Math.abs(price)))
                 .findFirst()
                 .get();
     }
