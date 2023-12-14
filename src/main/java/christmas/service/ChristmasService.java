@@ -14,7 +14,7 @@ public class ChristmasService {
     public Reservation createReservation(Order order) {
         AppliedDiscount appliedDiscounts = AppliedDiscount.from(new EnumMap<>(Discount.class));
 
-        if (order.calculatePrice() >= 1_000) {
+        if (order.calculatePrice() >= 10_000) {
             appliedDiscounts = createFrom(order);
         }
         return Reservation.createFrom(order, appliedDiscounts, applyGiftPromotion(order));
