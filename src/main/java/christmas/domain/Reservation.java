@@ -69,6 +69,6 @@ public class Reservation {
      * 적용된 할인이벤트의 존재여부 확인
      */
     public boolean hasNoAppliedDiscounts() {
-        return promotionBox.isEmpty();
+        return appliedDiscount.getAppliedDiscounts().isEmpty();
     }
 }
