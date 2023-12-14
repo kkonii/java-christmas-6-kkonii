@@ -55,4 +55,11 @@ public class Reservation {
     public EnumMap<Discount, Integer> getAppliedDiscount() {
         return appliedDiscount.getAppliedDiscounts();
     }
+
+    /**
+     * 적용된 할인이벤트의 존재여부 확인
+     */
+    public boolean hasNoAppliedDiscounts() {
+        return promotionBox.isEmpty();
+    }
 }

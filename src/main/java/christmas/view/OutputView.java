@@ -50,9 +50,14 @@ public class OutputView {
     public void printBenefitHistory(Reservation reservation, Order order) {
         System.out.println();
         System.out.println("<혜택 내역>");
-        reservation.getAppliedDiscount().entrySet().stream()
-                .forEach(entry -> System.out.println(String.format(HISTORY_FORMAT, entry.getKey().getTitle(),
-                        entry.getValue() * entry.getKey().getDiscountPrice(order) * -1)));
+        if (reservation.hasNoAppliedDiscounts()) {
+            System.out.println("없음");
+        }
+        if (!reservation.hasNoAppliedDiscounts()) {
+            reservation.getAppliedDiscount().entrySet().stream()
+                    .forEach(entry -> System.out.println(String.format(HISTORY_FORMAT, entry.getKey().getTitle(),
+                            entry.getValue() * entry.getKey().getDiscountPrice(order) * -1)));
+        }
     }
 
     public void printBenefitPrices(Reservation reservation) {
