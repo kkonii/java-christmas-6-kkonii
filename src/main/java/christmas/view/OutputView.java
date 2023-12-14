@@ -9,6 +9,7 @@ public class OutputView {
     private final static String MENU_QUANTITY_FORMAT = "%s %d개";
     private static final String PRICE_FORMAT = "%,d원";
     private static final String HISTORY_FORMAT = "%s: %,d원";
+    private static final String NONE_VALUE = "없음";
 
     public void printVisitingDate(VisitingDate date) {
         System.out.println("12월 " + date.getDay() + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
@@ -35,7 +36,7 @@ public class OutputView {
         System.out.println();
         System.out.println("<증정 메뉴>");
         if (reservation.hasNoPromotion()) {
-            System.out.println("없음");
+            System.out.println(NONE_VALUE);
         }
         if (!reservation.hasNoPromotion()) {
             reservation.getPromotionBox()
@@ -51,7 +52,7 @@ public class OutputView {
         System.out.println();
         System.out.println("<혜택 내역>");
         if (reservation.hasNoAppliedDiscounts()) {
-            System.out.println("없음");
+            System.out.println(NONE_VALUE);
         }
         if (!reservation.hasNoAppliedDiscounts()) {
             reservation.getAppliedDiscount().entrySet().stream()
