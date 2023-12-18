@@ -7,6 +7,7 @@ import christmas.domain.promotion.Discount;
 import christmas.domain.promotion.PromotionItem;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 
@@ -34,7 +35,8 @@ public class ChristmasService {
     private List<Discount> findApplicableDiscounts(Order order) {
         return order.getOrderItems().stream()
                 .flatMap(orderItem -> Arrays.stream(Discount.values())
-                        .filter(discount -> discount.isApplicable(order.getVisitingDate(), orderItem)))
+                        .filter(discount -> discount.isApplicable(order.getVisitingDate(), orderItem))
+                        .flatMap(discount -> Collections.nCopies(orderItem.getEachQuantity(), discount).stream()))
                 .toList();
     }
 

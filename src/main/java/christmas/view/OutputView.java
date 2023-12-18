@@ -62,8 +62,7 @@ public class OutputView {
         if (!reservation.hasNoPromotion()) {
             reservation.getPromotionItems().forEach(
                     promotionItem -> System.out.println(String.format(HISTORY_FORMAT, promotionItem.getPromotionTitle(),
-                            promotionItem.getGift().getPrice() * -1)
-                    ));
+                            promotionItem.getGift().getPrice() * -1)));
         }
     }
 
